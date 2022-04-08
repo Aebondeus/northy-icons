@@ -1,0 +1,39 @@
+{
+  "name": "northy-icons",
+  "files": [
+    "/lib"
+  ],
+  "main": "lib/northy-icons.umd.js",
+  "module": "lib/northy-icons.es.js",
+  "types": "lib/main.d.ts",
+  "version": "1.0.0",
+  "description": "Icons for my study project",
+  "repository": "git@github.com:Aebondeus/northy-icons.git",
+  "author": "Aebondeus <aebondeus@yandex.ru>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "node collectIcons.js && vite build && vue-tsc --declaration --emitDeclarationOnly",
+    "test:unit": "vitest --environment jsdom",
+    "lint": "eslint . --ext .vue,.ts --fix --ignore-path"
+  },
+  "dependencies": {
+    "vue": "^3.2.31"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^16.2.14",
+    "@types/node": "^16.11.26",
+    "@vitejs/plugin-vue": "^2.3.1",
+    "@vue/eslint-config-prettier": "^7.0.0",
+    "@vue/eslint-config-typescript": "^10.0.0",
+    "@vue/tsconfig": "^0.1.3",
+    "eslint": "^8.5.0",
+    "eslint-plugin-vue": "^8.2.0",
+    "jsdom": "^19.0.0",
+    "prettier": "^2.5.1",
+    "typescript": "~4.6.3",
+    "vite": "^2.9.1",
+    "vitest": "^0.8.1",
+    "vue-tsc": "^0.33.9"
+  }
+}
