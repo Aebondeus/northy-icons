@@ -1,21 +1,29 @@
 const fs = require('fs');
 const path = require('path')
 
-const folderEntrypoint = path.resolve(__dirname, 'src/icons');
+const iconsEntrypoint = path.resolve(__dirname, 'src/icons');
+const logoEntryPoint = path.resolve(__dirname, 'src/logo');
 const mainEntrypoint = path.resolve(__dirname, 'src/main.ts');
 
-const iconsPaths =  fs.readdirSync(folderEntrypoint);
+const icons =  fs.readdirSync(iconsEntrypoint);
+const logo = fs.readdirSync(logoEntryPoint);
+
+const readableFolders = { icons, logo };
 const stream = fs.createWriteStream(mainEntrypoint);
 
 stream.once('open', () => {
-    const icons = iconsPaths.map((iconPath) => {
-        const iconName = iconPath.split('.')[0];
-        stream.write(`export { default as ${iconName} } from "./icons/${iconPath}";\n`);
+    Object.entries(readableFolders).map(([folderName, files]) => {
 
-        return iconName;
+        const folderFiles = files.map((foldersFile) => {
+            const fileName = foldersFile.split('.')[0];
+            stream.write(`export { default as ${fileName} } from "./${folderName}/${foldersFile}";\n`);
+
+            return fileName;
+        });
+
+        stream.write(`export const ${folderName}Json = ${JSON.stringify(folderFiles)};\n`);
     });
 
-    stream.write(`export const iconsJson = ${JSON.stringify(icons)};\n`);
     stream.end();
 })
 
